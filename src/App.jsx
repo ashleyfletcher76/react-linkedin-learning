@@ -2,16 +2,19 @@ import { BiArchive } from "react-icons/bi";
 import Search from "./components/Search";
 import AddAppointment from "./components/AddAppointment";
 import AppointmentInfo from "./components/AppointmentInfo";
-import { useEffect, useState } from "react";
+import { useAppointments } from "./hooks/useAppointments";
 
 function App() {
-  const [appointmentList, setAppointmentList] = useState([]);
+  const { appointments, isLoading, error } = useAppointments();
 
-  useEffect(() => {
-    fetch("./data.json")
-      .then((res) => res.json())
-      .then((data) => setAppointmentList(data));
-  }, []);
+  if (isLoading) {
+    return <p className="container mt-3">Loading appointments...</p>;
+  }
+  if (error) {
+    return (
+      <p className="container mt-3 text-red-500">Failed to load appointments</p>
+    );
+  }
 
   return (
     <div className="App mx-atuo container mt-3 font-thin">
@@ -22,7 +25,7 @@ function App() {
       <AddAppointment />
       <Search />
       <ul className="divide-y divide-gray-200">
-        {appointmentList.map((appointment) => (
+        {appointments.map((appointment) => (
           <AppointmentInfo key={appointment.id} appointment={appointment} />
         ))}
       </ul>
