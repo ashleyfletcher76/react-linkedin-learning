@@ -13,5 +13,13 @@ export function useAppointments() {
       .finally(() => setIsLoading(false));
   }, []);
 
-  return { appointments, isLoading, error };
+  function deleteAppointment(appointmentId) {
+    setAppointments((prevAppointments) =>
+      prevAppointments.filter(
+        (appointment) => appointment.id !== appointmentId,
+      ),
+    );
+  }
+
+  return { appointments, isLoading, error, deleteAppointment };
 }

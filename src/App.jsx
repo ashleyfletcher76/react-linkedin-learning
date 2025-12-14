@@ -5,7 +5,8 @@ import AppointmentInfo from "./components/AppointmentInfo";
 import { useAppointments } from "./hooks/useAppointments";
 
 function App() {
-  const { appointments, isLoading, error } = useAppointments();
+  const { appointments, isLoading, error, deleteAppointment } =
+    useAppointments();
 
   if (isLoading) {
     return <p className="container mt-3">Loading appointments...</p>;
@@ -26,7 +27,11 @@ function App() {
       <Search />
       <ul className="divide-y divide-gray-200">
         {appointments.map((appointment) => (
-          <AppointmentInfo key={appointment.id} appointment={appointment} />
+          <AppointmentInfo
+            key={appointment.id}
+            appointment={appointment}
+            onDeleteAppointment={deleteAppointment}
+          />
         ))}
       </ul>
     </div>
