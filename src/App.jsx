@@ -1,11 +1,11 @@
 import { BiArchive } from "react-icons/bi";
-import Search from "./components/Search"
+import Search from "./components/Search";
 
 function App() {
   return (
-    <div className="App container mx-atuo mt-3 font-thin">
+    <div className="App mx-atuo container mt-3 font-thin">
       <h1 className="text-5xl">
-        <BiArchive className="inline-block text-red-500 align-top" />
+        <BiArchive className="inline-block align-top text-red-500" />
         Your Appointments
       </h1>
       <Search />
@@ -14,4 +14,3 @@ function App() {
 }
 
 export default App;
-
